@@ -1,0 +1,55 @@
+/* 1. Membuat HP berada tepat di tengah layar */
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #121212; /* Warna background luar agar kontras */
+}
+
+/* 2. Bingkai HP */
+.phone-wrapper {
+  position: relative;
+  width: 360px; 
+  height: 720px; /* Sesuaikan tinggi HP */
+  border: 12px solid #1a1a1a;
+  border-radius: 45px;
+  overflow: hidden; /* INI KUNCI PEMOTONG NAVIGASI */
+  background: #000;
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8);
+}
+
+/* 3. Area Layar */
+.phone-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 4. Mengatur Iframe Canva agar Navigasi Terpotong */
+.phone-screen iframe {
+  position: absolute;
+  border: none;
+  width: 100%;
+  
+  /* Logika Pemotongan: */
+  /* Kita buat iframe lebih tinggi dari HP, lalu kita geser ke atas */
+  height: 110%; /* Lebih tinggi sedikit dari container */
+  top: -45px;   /* Geser ke atas untuk potong header Canva */
+  left: 0;
+}
+
+/* 5. Penutup navigasi bawah (opsional tapi ampuh) */
+.phone-wrapper::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px; /* Menutup footer Canva yang membandel */
+  background: #000; 
+  z-index: 10;
+  pointer-events: none;
+}
